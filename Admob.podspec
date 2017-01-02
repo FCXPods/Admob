@@ -22,6 +22,8 @@ Pod::Spec.new do |s|
   s.source       = { :git => "https://github.com/FCXPods/Admob.git", :tag => "0.0.1" }
   s.platform     = :ios, "8.0"
 
+  s.source_files  = "*.{h,m}"
+
   s.vendored_frameworks = "GoogleMobileAds.framework"
 
   s.frameworks  = "AdSupport", "AudioToolbox", "AVFoundation", "CoreGraphics", "CoreTelephony", "EventKit", "EventKitUI", "MediaPlayer", "MessageUI", "StoreKit", "SystemConfiguration"
