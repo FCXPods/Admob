@@ -11,9 +11,18 @@
 
 @interface UIViewController (Admob) <GADBannerViewDelegate>
 
-- (void)showAdmobBanner:(CGRect)frame adUnitID:(NSString *)adUnitID;
+@property (nonatomic, copy) dispatch_block_t success;
+
+- (void)showAdmobBanner:(CGRect)frame
+               adUnitID:(NSString *)adUnitID;
 
 - (void)showAdmobBanner:(CGRect)frame
                adUnitID:(NSString *)adUnitID
-              superView:(UIView *)superView;
+                success:(dispatch_block_t)success;
+
+- (void)showAdmobBanner:(CGRect)frame
+               adUnitID:(NSString *)adUnitID
+              superView:(UIView *)superView
+                success:(dispatch_block_t)success;
+
 @end

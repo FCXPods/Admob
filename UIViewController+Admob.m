@@ -14,14 +14,22 @@
 
 #pragma mark - Admob
 
-- (void)showAdmobBanner:(CGRect)frame adUnitID:(NSString *)adUnitID {
-    [self showAdmobBanner:frame adUnitID:adUnitID superView:self.view];
+- (void)showAdmobBanner:(CGRect)frame
+               adUnitID:(NSString *)adUnitID {
+    [self showAdmobBanner:frame adUnitID:adUnitID superView:self.view success:nil];
 }
 
 - (void)showAdmobBanner:(CGRect)frame
                adUnitID:(NSString *)adUnitID
-              superView:(UIView *)superView {
-    
+                success:(dispatch_block_t)success {
+    [self showAdmobBanner:frame adUnitID:adUnitID superView:self.view success:success];
+}
+
+- (void)showAdmobBanner:(CGRect)frame
+               adUnitID:(NSString *)adUnitID
+              superView:(UIView *)superView
+                success:(dispatch_block_t)success {
+    self.success = success;
     self.mobbannerView.frame = frame;
     self.mobbannerView.delegate = self;
     self.mobbannerView.adUnitID = adUnitID;
@@ -43,6 +51,9 @@
 
 - (void)adViewDidReceiveAd:(GADBannerView *)bannerView;
 {
+    if (self.success) {
+        self.success();
+    }
     //    NSLog(@"%s", __func__);
 }
 /// Tells the delegate that an ad request failed. The failure is normally due to network
@@ -62,6 +73,14 @@
 
 - (void)setMobbannerView:(GADBannerView *)mobbannerView {
     objc_setAssociatedObject(self, @selector(mobbannerView), mobbannerView, OBJC_ASSOCIATION_RETAIN);
+}
+
+- (dispatch_block_t)success {
+    return objc_getAssociatedObject(self, _cmd);
+}
+
+- (void)setSuccess:(dispatch_block_t)success {
+    objc_setAssociatedObject(self, @selector(success), success, OBJC_ASSOCIATION_COPY_NONATOMIC);
 }
 
 @end
