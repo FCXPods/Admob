@@ -39,7 +39,7 @@
 - (void)showInterstitial {
     GADRequest *request = [GADRequest request];
     // Requests test ads on simulators.
-    request.testDevices = @[ kGADSimulatorID ];
+    request.testDevices = @[ kGADSimulatorID, @"f8bb43a77f9144ab3000965d8f795a2b" ];
     [self.interstitial loadRequest:request];
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{

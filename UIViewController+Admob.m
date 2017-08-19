@@ -45,14 +45,18 @@
     
     [self.mobbannerView loadRequest:request];
     [superView addSubview:self.mobbannerView];
+    self.mobbannerView.hidden = YES;
 }
 
 #pragma mark - GADBannerViewDelegate
 
 - (void)adViewDidReceiveAd:(GADBannerView *)bannerView;
 {
+    self.mobbannerView.hidden = NO;
     if (self.success) {
-        self.success();
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.success();
+        });
     }
     //    NSLog(@"%s", __func__);
 }
@@ -60,6 +64,7 @@
 /// connectivity or ad availablility (i.e., no fill).
 - (void)adView:(GADBannerView *)bannerView didFailToReceiveAdWithError:(GADRequestError *)error; {
     //    NSLog(@"%s info%@", __func__, error.localizedDescription);
+    self.mobbannerView.hidden = YES;
 }
 
 - (GADBannerView *)mobbannerView {
