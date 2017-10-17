@@ -39,10 +39,10 @@
     request.testDevices = @[
                             @"kGADSimulatorID",
                             @"f8231c85289a86089a541f6318fe5e5f",  // iphone4s
-                            @"f8b4c976eaaf84ec7ca039fdf5aa5a1e"
+                            @"f8b4c976eaaf84ec7ca039fdf5aa5a1e",
+                            @"f8bb43a77f9144ab3000965d8f795a2b"
                             ];
 #endif
-    
     [self.mobbannerView loadRequest:request];
     [superView addSubview:self.mobbannerView];
     self.mobbannerView.hidden = YES;
